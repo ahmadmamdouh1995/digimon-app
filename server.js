@@ -35,10 +35,12 @@ app.get('*', notFoundHandler);
 
 function homePage(req, res) {
     const url = 'https://digimon-api.herokuapp.com/api/digimon'
-    superagent(url).then((result) => {
+    superagent.post(url).then((result) => {
+        const digmon = req.body.result;
+
         const dog = new Digmon(dig);
         
-         
+        res.render('index', { all : digmon }) 
 
     }).catch((err) => errorHandler(err, req, res));
 }
